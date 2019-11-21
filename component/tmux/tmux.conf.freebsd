@@ -1,0 +1,9 @@
+bind C-o display-message "read FreeBSD conf"
+
+
+# コピーした内容をクリップボードに送る
+bind-key -t vi-copy y copy-pipe "cat | xsel -i --clipboard"
+bind-key -t vi-copy Enter copy-pipe "cat | xsel -i --clipboard"
+
+# クリップボードの内容を貼り付ける
+bind -r C-v run-shell "tmux set-buffer -- \"$(xsel -o --clipboard)\"; tmux paste-buffer"

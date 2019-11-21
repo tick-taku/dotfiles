@@ -1,0 +1,13 @@
+## development
+#
+
+# for anyenv
+export PATH="${HOME}/.anyenv/bin:${PATH}"
+eval "$(anyenv init -)"
+
+# for golang
+export GOPATH=${HOME}/go
+export PATH="${PATH}:${GOPATH}/bin"
+
+# for adb
+export PATH="${PATH}:/Users/ito.takumi/Library/Android/sdk/platform-tools"

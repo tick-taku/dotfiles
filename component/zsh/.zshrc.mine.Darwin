@@ -1,0 +1,23 @@
+# コマンドラインからXcode起動
+alias xcode='open -a Xcode'
+
+# コマンドラインからMacVim起動
+alias gvim='open -a MacVim'
+
+# 指定ディレクトリをFinderで開く
+fnd() {
+    if [ $# = 0 ]; then
+        open `pwd`
+    else
+        for arg in $@; do
+            if [ -d ${arg} ]; then
+                open ${arg}
+            else
+                open -R ${arg}
+            fi
+        done
+    fi
+}
+
+# HomeBrew-Caskで /Applications/ 以下にインストールする
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"

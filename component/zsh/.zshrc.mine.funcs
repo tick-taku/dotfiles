@@ -1,0 +1,214 @@
+## functions
+#
+
+
+##############################################################################
+# 内部使用関数
+##############################################################################
+
+# カレントディレクトリ以下をfindして選択した通常ファイルを返す
+#   $1 : findするパス
+#   $2 : findコマンドに渡す maxdepth
+#   $3 : findコマンドに渡す type
+#   $4 : .で始まる物を無視するかどうか 省略した場合は含む、何か指定した場合は含まない
+peco-findselect() {
+    local base_path="$1"
+    local max_depth="$2"
+    local find_type="$3"
+
+    if [ -n "$4" ]; then
+        local file=`find ${base_path} -maxdepth ${max_depth} -type ${find_type} ! -path "*/.*" 2>/dev/null | peco`
+    else
+        local file=`find ${base_path} -maxdepth ${max_depth} -type ${find_type} 2>/dev/null | peco`
+    fi
+    echo $file
+}
+
+
+# 指定したプログラムを開く
+# ZLEを使用するので 'zle -N ...', 'bindkey ...' をしてから使うこと
+#   $1 : 開きたいプログラムのコマンド
+#   $2 : プログラムに渡すコマンド
+open_command() {
+    BUFFER="$1 $2"
+    CURSOR=$#BUFFER
+    zle accept-line
+}
+
+
+# findで検索した結果をpecoで選択して指定したプログラムを開く
+# ZLEを使用するので 'zle -N ...', 'bindkey ...' をしてから使うこと
+#   $1 : 開きたいプログラムのコマンド
+peco_find_open_command() {
+    local file="$(peco-findselect . 5 f)"
+    if [ -n "${file}" ]; then
+        open_command $1 ${file}
+    fi
+}
+
+
+
+##############################################################################
+# キーバインド無しの関数
+##############################################################################
+
+# "up"コマンドは、ディレクトリ階層を非常に簡単に上れるようにする為のコマンドです。
+# "up"コマンドを単体で利用した場合、「cd ../」コマンドと同一です。
+# "up 2"のように、引数に数値を与えて実行した場合、その階層分だけ上に移動する事ができます。
+# By https://github.com/m-yamashita/up
+function up(){
+    cpath=./
+    for i in `seq 1 1 $1`; do
+        cpath=$cpath../
+    done
+    cd $cpath
+}
+
+
+# プロセスのkill
+# By http://k0kubun.hatenablog.com/entry/2014/07/06/033336
+function peco-pkill() {
+    for pid in `ps aux | peco | awk '{ print $2 }'`; do
+        kill $pid
+        echo "Killed ${pid}"
+    done
+}
+alias pk="peco-pkill"
+
+
+# gitの全ブランチ一覧を表示して選択したブランチにチェックアウト
+function ch() {
+    local selectted_branch="$(git branch -a --sort=-authordate | perl -pe 's#^remotes/origin/###' | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+
+# gitのローカルブランチ一覧を表示して選択したブランチにチェックアウト
+function ch-local() {
+    local selectted_branch="$(git branch | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+
+# gitのリモートブランチ一覧を表示して選択したブランチにチェックアウト
+function ch-remote() {
+    local selectted_branch="$(git branch -r --sort=-authordate | perl -pe 's#origin/###' | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+
+##############################################################################
+# キーバインド付きの関数
+##############################################################################
+
+#
+# historyからの絞り込み実行
+# By http://k0kubun.hatenablog.com/entry/2014/07/06/033336
+#
+function peco-select-history() {
+    typeset tac
+    if which tac > /dev/null; then
+        tac=tac
+    else
+        tac='tail -r'
+    fi
+    BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+
+#
+# 汎用ディレクトリ選択
+# By http://qiita.com/ymorired/items/4b0d8e95786efc1378b4
+#
+function peco-findcd() {
+    # .で始まるディレクトリは除外してカレントから5階層下までリスティング
+    local selected_dir="$(peco-findselect . 5 d true)"
+    if [ -d "$selected_dir" ]; then
+        BUFFER="cd \"${selected_dir}\""
+        CURSOR=$#BUFFER
+        zle accept-line
+    fi
+    zle clear-screen
+ }
+zle -N peco-findcd
+bindkey '^p^k' peco-findcd
+
+
+#
+# カレントディレクトリ以下をfindして選択したファイルをvimで開く
+#
+function peco-findvim() {
+    peco_find_open_command "vim"
+}
+zle -N peco-findvim
+bindkey '^v^i' peco-findvim
+
+
+#
+# カレントディレクトリ以下をfindして選択したファイルをgVIM(Macの場合はMacVIM)で開く
+#
+function peco-findmacvim() {
+    local GVIM_PATH="/Applications/MacVIM.app"
+    peco_find_open_command "open -a ${GVIM_PATH}"
+}
+zle -N peco-findmacvim
+bindkey '^g^v' peco-findmacvim
+
+
+#
+# カレントディレクトリ以下をfindして選択したファイルをcotで開く
+#
+function peco-findcot() {
+    local COT_PATH="/Applications/CotEditor.app"
+    peco_find_open_command "open -a ${COT_PATH}"
+}
+zle -N peco-findcot
+bindkey '^p^o' peco-findcot
+
+
+#
+# 'cd ..' する
+#
+function cd_up() {
+    cd ..
+    zle reset-prompt
+}
+zle -N cd_up
+# bindkey '^f' vi-kill-line # デフォルトのキーバインド(^U)を変更
+# bindkey '^u' cd_up
+
+
+#
+# viキーバインド上でコマンドラインスタックを実行(Ctrl+Q)する
+#
+show_buffer_stack() {
+    POSTDISPLAY="
+    stack: $LBUFFER"
+    zle push-line-or-edit
+}
+zle -N show_buffer_stack
+setopt noflowcontrol
+bindkey '^q' show_buffer_stack
+
+
+#
+# 'git status'した結果を選択してカーソル位置に挿入(複数選択可)
+#
+function peco_insert_selected_git_files() {
+    LBUFFER+=$(git status --porcelain | peco | awk -F ' ' '{print $NF}' | tr '\n' ' ')
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_selected_git_files
+bindkey "^g^s" peco_insert_selected_git_files
+
+#
+# agした結果をpecoで選択してvimで開く
+#
+function agvim () {
+  vim $(ag "$@" | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
+}

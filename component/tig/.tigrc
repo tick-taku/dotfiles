@@ -1,0 +1,47 @@
+# main viewの左端にコミットIDを表示する
+set main-view = id date author commit-title:graph=yes,refs=yes
+
+# デフォルトの !git gcを無効化して文頭、文末移動にする
+bind generic g move-first-line
+bind generic G move-last-line
+
+# ^fでスクロールダウン, ^bでスクロールアップ
+bind generic <Ctrl-f> scroll-page-down
+bind generic <Ctrl-b> scroll-page-up
+
+# ^rで再読み込み
+bind generic <Ctrl-r> refresh
+
+# diff view時の差分移動
+# USキーボード用 (次差分: 2 前差分: @)
+bind diff @ :?^@@
+bind stage @ :?^@@
+bind diff 2 :/^@@
+bind stage 2 :/^@@
+# JISキーボード用 (次差分: @ 前差分: `)
+# bind diff ` :?^@@
+# bind stage ` :?^@@
+
+# カーソル位置のcommitをgit rebase -iに渡す
+bind diff R !git rebase -i %(commit)
+bind main R !git rebase -i %(commit)
+
+# カーソル位置のブランチを現在のブランチにgit rebaseする
+bind refs R !?git rebase %(branch)
+
+# カーソル位置のブランチを現在のブランチにgit mergeする
+bind refs M !?git merge %(branch)
+
+# git stash apply追加
+bind stash A !?git stash apply %(stash)
+
+# git stashを実行
+bind main S     !?git stash
+bind status S   !?git stash
+# git stash saveを実行
+bind main   <Ctrl-S> !?git stash save "%(prompt Enter save comment: )"
+bind status <Ctrl-S> !?git stash save "%(prompt Enter save comment: )"
+
+# refs view カーソル位置のブランチを元にして新しいブランチを作成
+bind branch n   !git checkout -b "%(prompt Enter new branch name: )" %(branch)
+

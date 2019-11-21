@@ -1,0 +1,15 @@
+# 指定ディレクトリをnautilusで開く
+alias nt=nautilus
+
+# Mac OS-Xのpbcopyの代わり
+alias pbcopy='xsel --clipboard --input'
+
+# Mac OS-Xのpbpasteの代わり
+alias pbpaste='xsel --clipboard --output'
+
+# tmuxのコピーバッファとクリップボードを連携
+alias tmux-copy='tmux save-buffer - | pbcopy'
+
+# コマンドラインからgVim起動
+$ gv() {gvim -f $1 &!}
+

@@ -1,0 +1,47 @@
+pane	DIT	1	:SANDBOX	1	:*	1	:/Users/matsumoto.takumi/sandbox	1	emacs-25.1	:emacs -nw .
+pane	DIT	2	:DOCKER	0	:Z	1	:/Users/matsumoto.takumi/work/XUMO/XumoTools/beacon_server	0	emacs-25.1	:emacs -nw .
+pane	DIT	2	:DOCKER	0	:Z	2	:/Users/matsumoto.takumi/work/XUMO/XumoTools/beacon_server2	0	node	:node server.js
+pane	DIT	2	:DOCKER	0	:Z	3	:/Users/matsumoto.takumi/work/XUMO/XumoTools/beacon_server2	1	tail	:tail -f logs/ContentBeacon_20170508160451.csv
+pane	DIT	3	:sudo	0	:-	1	:/Users/matsumoto.takumi/Downloads	0	emacs-25.1	:emacs -nw .
+pane	DIT	3	:sudo	0	:-	2	:	1	sudo	:sudo ./webOS_TV_SDK_Installer_macosx
+pane	SERVER	1	:CAPETOWN:8080	0	:	1	:/Users/matsumoto.takumi/work/XUMO/Capetown	1	zsh	:
+pane	SERVER	1	:CAPETOWN:8080	0	:	2	:/Users/matsumoto.takumi/work/XUMO/Capetown/production/panasonic/2.2.36	0	node	:node /Users/matsumoto.takumi/.anyenv/envs/ndenv/versions/v6.10.1/bin/http-server -c-1 --cors -p 8080
+pane	SERVER	2	:LGLEGACY:20080	0	:-	1	:/Users/matsumoto.takumi/work/XUMO/CapetownLGLegacy	1	zsh	:
+pane	SERVER	2	:LGLEGACY:20080	0	:-	2	:/Users/matsumoto.takumi/work/XUMO/CapetownLGLegacy/production/lg-legacy/2.2.35	0	node	:node /Users/matsumoto.takumi/.anyenv/envs/ndenv/versions/v6.10.1/bin/http-server -c-1 --cors -p 20080
+pane	SERVER	3	:CAST_RECEIVER:10080	0	:	1	:/Users/matsumoto.takumi/work/XUMO/ChromecastXumoApp/XumoCastReceiver	1	zsh	:emacs -nw gulpfile.js
+pane	SERVER	3	:CAST_RECEIVER:10080	0	:	2	:/Users/matsumoto.takumi/work/XUMO/ChromecastXumoApp/XumoCastReceiver/production/chromecast/1.0.13	0	node	:node /Users/matsumoto.takumi/.anyenv/envs/ndenv/versions/v6.10.1/bin/http-server -c-1 --cors -p 10080
+pane	SERVER	4	:CAST_SENDER:18080	0	:	1	:/Users/matsumoto.takumi/work/XUMO/ChromecastXumoApp/XumoCastSender	1	zsh	:emacs -nw .
+pane	SERVER	4	:CAST_SENDER:18080	0	:	2	:/Users/matsumoto.takumi/work/XUMO/ChromecastXumoApp/XumoCastSender/production/chromecast/1.0.6	0	node	:node /Users/matsumoto.takumi/.anyenv/envs/ndenv/versions/v6.10.1/bin/http-server -c-1 --cors -p 18080
+pane	SERVER	5	:ADS:8888	0	:	1	:/Users/matsumoto.takumi/work/XUMO/data/ad	1	emacs-25.1	:emacs -nw .
+pane	SERVER	5	:ADS:8888	0	:	2	:/Users/matsumoto.takumi/work/XUMO/data/ad	0	node	:node /Users/matsumoto.takumi/.anyenv/envs/ndenv/versions/v6.10.1/bin/http-server -c-1 --cors -p 8888
+pane	SERVER	5	:ADS:8888	0	:	3	:/Users/matsumoto.takumi/work/XUMO/data/ad	0	zsh	:
+pane	SERVER	6	:HISENSE:30080	1	:*	1	:/Users/matsumoto.takumi/work/XUMO/CapetownLiveLite	1	zsh	:
+pane	SERVER	6	:HISENSE:30080	1	:*	2	:/Users/matsumoto.takumi/work/XUMO/CapetownLiveLite/production/hisense/2.2.33	0	node	:node /Users/matsumoto.takumi/.anyenv/envs/ndenv/versions/v6.10.1/bin/http-server -c-1 --cors -p 30080
+pane	XUMO	1	:LGLEGACY	0	:-	1	:/Users/matsumoto.takumi/work/XUMO/CapetownLGLegacy	0	emacs-25.1	:emacs -nw .
+pane	XUMO	1	:LGLEGACY	0	:-	2	:/Users/matsumoto.takumi/work/XUMO/CapetownLGLegacy	0	zsh	:
+pane	XUMO	1	:LGLEGACY	0	:-	3	:/Users/matsumoto.takumi/work/XUMO/CapetownLGLegacy/src/lib/xumo-video-player	1	zsh	:
+pane	XUMO	2	:DOC	0	:	1	:/Users/matsumoto.takumi/work/XUMO/XumoDocument	0	zsh	:
+pane	XUMO	2	:DOC	0	:	2	:/Users/matsumoto.takumi/work/XUMO/XumoDocument	1	zsh	:
+pane	XUMO	3	:CHROMECAST_XUMO_APP	0	:Z	1	:/Users/matsumoto.takumi/work/XUMO/ChromecastXumoApp	1	emacs-25.1	:emacs -nw .
+pane	XUMO	3	:CHROMECAST_XUMO_APP	0	:Z	2	:/Users/matsumoto.takumi/work/XUMO/ChromecastXumoApp	0	zsh	:
+pane	XUMO	4	:CAPETOWN	0	:Z	1	:/Users/matsumoto.takumi/work/XUMO/Capetown	0	emacs-25.1	:emacs -nw .
+pane	XUMO	4	:CAPETOWN	0	:Z	2	:/Users/matsumoto.takumi/work/XUMO/Capetown	1	zsh	:
+pane	XUMO	4	:CAPETOWN	0	:Z	3	:/Users/matsumoto.takumi/work/XUMO/Capetown/src/lib/xumo-video-player	0	zsh	:
+pane	XUMO	5	:HISENSE	1	:*Z	1	:/Users/matsumoto.takumi/work/XUMO/CapetownLiveLite	1	emacs-25.1	:emacs -nw .
+pane	XUMO	5	:HISENSE	1	:*Z	2	:/Users/matsumoto.takumi/work/XUMO/CapetownLiveLite	0	node	:node
+pane	XUMO	5	:HISENSE	1	:*Z	3	:	0	zsh	:less
+window	DIT	1	1	:*	e7e4,238x67,0,0,25
+window	DIT	2	0	:Z	828e,238x67,0,0{119x67,0,0,33,118x67,120,0[118x33,120,0,34,118x33,120,34,35]}
+window	DIT	3	0	:-	d957,238x67,0,0{119x67,0,0,45,118x67,120,0,46}
+window	SERVER	1	0	:	5958,238x67,0,0{119x67,0,0,18,118x67,120,0,17}
+window	SERVER	2	0	:-	d952,238x67,0,0{119x67,0,0,21,118x67,120,0,22}
+window	SERVER	3	0	:	d957,238x67,0,0{119x67,0,0,26,118x67,120,0,27}
+window	SERVER	4	0	:	d959,238x67,0,0{119x67,0,0,28,118x67,120,0,29}
+window	SERVER	5	0	:	628a,238x67,0,0{119x67,0,0,30,118x67,120,0[118x33,120,0,31,118x33,120,34,32]}
+window	SERVER	6	1	:*	d952,238x67,0,0{119x67,0,0,40,118x67,120,0,41}
+window	XUMO	1	0	:-	579c,238x67,0,0{119x67,0,0,0,118x67,120,0[118x33,120,0,1,118x33,120,34,23]}
+window	XUMO	2	0	:	8ebc,238x67,0,0{119x67,0,0,3,118x67,120,0,4}
+window	XUMO	3	0	:Z	5953,238x67,0,0{119x67,0,0,12,118x67,120,0,13}
+window	XUMO	4	0	:Z	428d,238x67,0,0{119x67,0,0,14,118x67,120,0[118x33,120,0,16,118x33,120,34,20]}
+window	XUMO	5	1	:*Z	8f9b,238x67,0,0{119x67,0,0[119x33,0,0,38,119x33,0,34,44],118x67,120,0,39}
+state	DIT	SERVER
