@@ -34,10 +34,10 @@
 ;; (load-theme 'tango-dark t)
 ;; (load-theme 'wombat t)
 ;; (load-theme 'wheatgrass t)
-;; (load-theme 'tsdh-dark t)
+(load-theme 'tsdh-dark t)
 ;; (load-theme 'adwaita t)
-(load "~/.emacs-lisp/monokai-theme.el")
-(load-theme 'monokai t)
+;;(load "~/.emacs-lisp/monokai-theme.el")
+;; (load-theme 'monokai t)
 ;; (load-theme 'tsdh-dark t)
 
 ;;---------------------------------------------------------------------------
@@ -135,23 +135,26 @@
 ;;---------------------------------------------------------------------------
 ;; 下線
 ;;---------------------------------------------------------------------------
-(defface hlline-face
-  '((((class color)
-      (background dark))
-     (:background "gray0"))
-    (((class color)
-      (background light))
+;;(defface hlline-face
+;;  '((((class color)
+;;      (background dark))
+;;     (:background "gray0"))
+;;    (((class color)
+;;      (background light))
 ;;     (:background "ForestGreen"))
-     (:background "gray30"))
-    (t
-     ()))
-  "Used face hl-line.")
-(setq hl-line-face 'hlline-face)
-(global-hl-line-mode)
+;;     (:background "gray30"))
+;;    (t
+;;     ()))
+;;  "Used face hl-line.")
+;;(setq hl-line-face 'hlline-face)
+;;(global-hl-line-mode)
 
 ;;---------------------------------------------------------------------------
 ;; Common
 ;;---------------------------------------------------------------------------
+;; スタートアップメッセージを表示させない
+(setq inhibit-startup-message 1)
+
 ;;; メニューバーとツールバーを表示しない
 (menu-bar-mode -1)
 ;(tool-bar-mode -1)
@@ -213,6 +216,17 @@
 ;;---------------------------------------------------------------------------
 ;; C-q でdiredに移動
 ;; (global-set-key "\C-Q" 'quit-window)
+
+;; コメントアウト
+;; 一行
+(defun one-line-comment ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (set-mark (point))
+    (end-of-line)
+    (comment-or-uncomment-region (region-beginning) (region-end))))
+(global-set-key (kbd "\M-/") 'one-line-comment)
 
 (define-key global-map "\M-?" 'help-for-help)
 (global-set-key "\C-h" 'backward-delete-char)
