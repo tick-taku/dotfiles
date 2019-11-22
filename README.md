@@ -2,6 +2,12 @@
 
 ---
 
+### Download dotfiles.
+
+```
+bash -c "`curl -fsSL https://raw.githubusercontent.com/tick-taku/dotfiles/master/etc/init`"
+```
+
 ### App instlation.
 
 ```

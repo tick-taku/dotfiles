@@ -2,7 +2,7 @@
 
 DOTFILES=$HOME/dotfiles
 DOTFILES_URL="https://github.com/tick-taku/dotfiles"
-APP_TO_ACQUIRE="zsh vim tmux python emacs peco tig"
+APP_TO_ACQUIRE="zsh vim neovim tmux python emacs peco tig make"
 
 is_exists() {
     which "$1" >/dev/null 2>&1
@@ -51,31 +51,6 @@ is_linux() {
     fi
 }
 
-download_apps() {
-    if is_linux; then
-        if [ -f /etc/debian_version ] || [ -f /etc/debian_release ]; then
-            echo "Update [apt] first."
-            sudo apt update -q
-            echo ""
-
-            sudo apt install -y -q $APP_TO_ACQUIRE
-        fi
-
-    elif is_osx; then
-
-        if ! is_exists "brew"; then
-            echo "Homebrew is not instaled!!!"
-            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-            brew tap caskroom/cask
-            brew cask --version
-            echo ""
-        fi
-
-        brew install $APP_TO_ACQUIRE
-    fi
-}
-
-
 echo '
 ██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
 ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
@@ -114,5 +89,27 @@ else
 fi
 
 echo 'Download apps to be acquired.'
-download_apps
 
+if is_linux; then
+     if [ -f /etc/debian_version ] || [ -f /etc/debian_release ]; then
+       echo "Update [apt] first."
+       sudo apt update -q
+       echo ""
+
+       sudo apt install -y -q $APP_TO_ACQUIRE
+     fi
+
+elif is_osx; then
+    if ! is_exists "brew"; then
+        echo "Homebrew is not instaled!!!"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        brew tap caskroom/cask
+        brew cask --version
+        echo ""
+    fi
+
+    brew install $APP_TO_ACQUIRE
+fi
+
+echo 'Apps installed.'
+echo ''
