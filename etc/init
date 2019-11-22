@@ -87,9 +87,9 @@ echo '
 echo 'Now start to install the dotfiles.'
 echo ''
 
-if [ ! -d "$dotfiles" ]; then
+if [ ! -d "$DOTFILES" ]; then
   if is_exists "git"; then
-    git clone ${DOTFILES_URL}.git "$dotfiles"
+    git clone ${DOTFILES_URL}.git "$DOTFILES"
     echo "The dofiles is installed!!!"
 
   elif is_exists "curl" || is_exists "wget"; then
