@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOTFILES=$HOME/dotfiles
-DOTFILES_URL="https://tmp"
+DOTFILES_URL="https://github.com/tick-taku/dotfiles"
 APP_TO_ACQUIRE="zsh vim tmux python emacs peco tig"
 
 is_exists() {
