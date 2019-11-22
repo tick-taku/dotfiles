@@ -5,7 +5,7 @@
 ### App instlation.
 
 ```
-./etc/init.sh
+make init
 ```
 
 ### Deploy dotfiles.
