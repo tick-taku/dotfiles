@@ -200,7 +200,7 @@ esac
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### for adb
-export PATH="$PATH:/Users/Takumi.Ito/Library/Android/sdk/platform-tools"
+export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 ### for npm
