@@ -206,12 +206,23 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 ### for npm
 export PATH="$PATH:./node_modules/.bin"
 
+### for Fitix auto start
+(fcitx-autostart > /dev/null 2>&1 &)
+
+
+### for anyenv
+if [ -d $HOME/.anyenv ]
+then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
+
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/Takumi.Ito/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/Takumi.Ito/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+[[ -f $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/Takumi.Ito/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/Takumi.Ito/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+[[ -f $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/Takumi.Ito/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/Takumi.Ito/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
+[[ -f $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

@@ -97,6 +97,8 @@ if is_linux; then
        echo ""
 
        sudo apt install -y -q $APP_TO_ACQUIRE
+
+       git clone https://github.com/riywo/anyenv ~/.anyenv
      fi
 
 elif is_osx; then
@@ -109,7 +111,10 @@ elif is_osx; then
     fi
 
     brew install $APP_TO_ACQUIRE
+
+    brew install anyenv
 fi
+
 
 echo 'Apps installed.'
 echo ''
