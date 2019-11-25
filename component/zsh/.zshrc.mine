@@ -83,6 +83,10 @@ export TERM=xterm-256color
 
 [ -f ${HOME}/.zshrc.mine.development ] && source ${HOME}/.zshrc.mine.development
 
+# Hyper terminalの設定
+
+[ -f ${HOME}/.zshrc.mine.hyper ] && source ${HOME}/.zshrc.mine.hyper
+
 # # 各職場環境のみの設定
 # #
 # [ -f ${HOME}/.zshrc.mine.work ] && source ${HOME}/.zshrc.mine.work
