@@ -33,10 +33,6 @@ alias c="git commit"
 
 alias rm="rm -i"
 
-#
-# for Ubuntu (Debian)
-#
-alias pbcopy='xsel --clipboard --input'
 
 #
 # for Android App Crawler
