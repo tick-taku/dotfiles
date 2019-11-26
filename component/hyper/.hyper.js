@@ -173,6 +173,24 @@ module.exports = {
       tabIconsColored: true,
       border: true,
       closeAlign: 'right'
+    },
+
+    paneNavigation: {
+      debug: false,
+      hotkeys: {
+        navigation: {
+          up: 'ctrl+alt+up',
+          down: 'ctrl+alt+down',
+          left: 'ctrl+alt+left',
+          right: 'ctrl+alt+right'
+        },
+        jump_prefix: 'ctrl+alt', // completed with 1-9 digits
+        permutation_modifier: 'shift', // Added to jump and navigation hotkeys for pane permutation
+        maximize: 'meta+enter'
+      },
+      showIndicators: false,
+      focusOnMouseHover: false,
+      inactivePaneOpacity: 0.5 // Set to 1 to disable inactive panes dimming
     }
   },
 
@@ -185,10 +203,11 @@ module.exports = {
   plugins: [
     "hyper-search",
     "hyper-statusline",
-    "hyper-opacity",
     "hyper-material-theme",
     "hypergoogle",
-    "hyper-tabs-enhanced"
+    "hyper-tabs-enhanced",
+    "hypercwd",
+    "hyper-pane"
   ],
 
   // in development, you can create a directory under
