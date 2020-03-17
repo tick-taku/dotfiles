@@ -120,6 +120,7 @@ elif is_osx; then
     fc-cache -vf
 fi
 
+git clone https://github.com/Shougo/neobundle.vim ~/dotfiles/component/vim/.vim/bundle/neobundle.vim
 
 echo 'Apps installed.'
 echo ''
