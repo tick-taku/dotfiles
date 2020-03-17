@@ -113,6 +113,11 @@ elif is_osx; then
     brew install $APP_TO_ACQUIRE
 
     brew install anyenv
+
+    brew tap sanemat/font
+    brew install ricty
+    cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+    fc-cache -vf
 fi
 
 
