@@ -54,7 +54,7 @@ module.exports = {
     // custom CSS to embed in the main window
     css: `
           .terms_terms{
-	      background-image:url("file:///home/ticktaku77/photos/android_background.png");
+	      background-image:url("file:///<HOME>/dotfiles/component/hyper/android_background.png");
 	      background-size: cover;
 	      background-repeat: no-repeat;
 	  }
