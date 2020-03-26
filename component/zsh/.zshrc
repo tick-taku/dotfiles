@@ -133,16 +133,6 @@ linux*)
     ;;
 esac
 
-# alias la="ls -a"
-# alias lf="ls -F"
-# alias ll="ls -l"
-# alias lla="ls -la"
-alias ll="ls -la"
-
-# alias du="du -h"
-# alias df="df -h"
-
-# alias su="su -l"
 
 ## ターミナルの設定
 #

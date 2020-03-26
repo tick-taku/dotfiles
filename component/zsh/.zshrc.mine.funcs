@@ -76,27 +76,6 @@ function peco-pkill() {
 alias pk="peco-pkill"
 
 
-# gitの全ブランチ一覧を表示して選択したブランチにチェックアウト
-function ch() {
-    local selectted_branch="$(git branch -a --sort=-authordate | perl -pe 's#^remotes/origin/###' | peco)"
-    git checkout ${selectted_branch##* }
-}
-
-
-# gitのローカルブランチ一覧を表示して選択したブランチにチェックアウト
-function ch-local() {
-    local selectted_branch="$(git branch | peco)"
-    git checkout ${selectted_branch##* }
-}
-
-
-# gitのリモートブランチ一覧を表示して選択したブランチにチェックアウト
-function ch-remote() {
-    local selectted_branch="$(git branch -r --sort=-authordate | perl -pe 's#origin/###' | peco)"
-    git checkout ${selectted_branch##* }
-}
-
-
 ##############################################################################
 # キーバインド付きの関数
 ##############################################################################
@@ -209,6 +188,41 @@ bindkey "^g^s" peco_insert_selected_git_files
 #
 # agした結果をpecoで選択してvimで開く
 #
-function agvim () {
+function agvim() {
   vim $(ag "$@" | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
 }
+
+
+##############################################################################
+# for Git
+##############################################################################
+
+# gitの全ブランチ一覧を表示して選択したブランチにチェックアウト
+function ch() {
+    local selectted_branch="$(git branch -a --sort=-authordate | perl -pe 's#^remotes/origin/###' | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+# gitのローカルブランチ一覧を表示して選択したブランチにチェックアウト
+function ch-local() {
+    local selectted_branch="$(git branch | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+# gitのリモートブランチ一覧を表示して選択したブランチにチェックアウト
+function ch-remote() {
+    local selectted_branch="$(git branch -r --sort=-authordate | perl -pe 's#origin/###' | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+# リモートブランチをマージ
+function pull() {
+    local selectted_branch="$(git branch | peco)"
+    git fetch && git checkout ${selectted_branch##* } && git rebase origin/${selectted_branch##* }
+}
+
+# develop をマージ
+function pull-dev() {
+    git fetch && git rebase origin/develop
+}
+

@@ -1,6 +1,42 @@
 #
 ## aliases
 #
+alias reload='source ~/.zshrc'
+
+alias zshrc='e ~/.zshrc'
+alias zshrc-dev='e ~/.zshrc.mine.development'
+alias zshrc-alias='e ~/.zshrc.mine.aliases'
+alias zshrc-funcs='e .zshrc.mine.funcs'
+
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias w='cd ~/works/'
+alias dot='cd ~/dotfiles/'
+
+#alias cp='cp -i'
+#alias mv='mv -i'
+alias rm='rm -i'
+
+alias grep='grep --color=auto'
+alias less='less -R'
+
+alias ll='ls -la'
+alias ll-clear='clear && ll'
+
+alias now='pwd | tr -d "\n" | pbcopy'
+
+alias -g C='| pbcopy'
+alias -g G='| grep --color=auto'
+alias -g H='| head'
+alias -g T='| tail'
+
+
+#
+# for SSH
+#
+alias ssh-key='ssh-keygen -t rsa'
+alias ssh-conf='e ~/.ssh/config'
 
 
 #
@@ -17,25 +53,43 @@ alias vim='nvim'
 # alias ta='tig --all'
 # alias ts='tig status'
 
+
 #
 # for Emacs
 #
 alias e="emacs -nw"
 
+
 #
 # for git
 #
+alias g='git'
 alias b="git branch"
 alias s="git status"
 alias a="git add"
 alias d="git diff --color"
-alias c="git commit"
+#alias c="git commit"
 
-alias rm="rm -i"
+alias g-conf='e ~/.gitconfig'
+
+alias t='tig'
+alias ta='tig --all'
+
+#
+# for Docker
+#
+alias dock='docker-compose'
+
+
+#
+# for ADB
+#
+alias ain='adb install'
+alias ash='adb shell'
+alias akill='adb kill-server'
 
 
 #
 # for Android App Crawler
 #
-
-alias app-clawler="java -jar /Users/Takumi.Ito/works/tools/app-crawler/crawl_launcher.jar --android-sdk ~/Library/Android/sdk"
+# alias app-clawler="java -jar /Users/Takumi.Ito/works/tools/app-crawler/crawl_launcher.jar --android-sdk ~/Library/Android/sdk"
