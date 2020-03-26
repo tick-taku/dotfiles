@@ -2,12 +2,35 @@
 #
 
 # for anyenv
-export PATH="${HOME}/.anyenv/bin:${PATH}"
-eval "$(anyenv init -)"
+if [ -d $HOME/.anyenv ]
+then
+   export PATH="${HOME}/.anyenv/bin:${PATH}"
+   eval "$(anyenv init -)"
+fi
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/s\ls.zsh ]] && . $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.comp\letions/sls.zsh
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/s\lss.zsh ]] && . $HOME/.anyenv/envs/ndenv/versions/6.10.0/lib/node_modules/serverless/node_modules/tabtab/.com\pletions/slss.zsh
+
 
 # for golang
 export GOPATH=${HOME}/go
 export PATH="${PATH}:${GOPATH}/bin"
 
 # for adb
-export PATH="${PATH}:/Users/ito.takumi/Library/Android/sdk/platform-tools"
+export PATH="${PATH}:${HOME}/Library/Android/sdk/platform-tools"
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+# for npm
+export PATH="$PATH:./node_modules/.bin"
+
+# Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
