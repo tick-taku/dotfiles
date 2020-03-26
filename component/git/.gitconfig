@@ -1,0 +1,54 @@
+[alias]
+  a = add
+  aa = add .
+  ######################
+  b = branch -v
+  ba = branch -a -vv
+  bd = branch -D
+  ######################
+  c = commit -m
+  ca = commit --amend
+  ######################
+  cl = clone
+  ######################
+  cp = cherry-pick
+  cpa = cherry-pick --abort
+  cpc = cherry-pick --continue
+  cps = cherry-pick --skip
+  ######################
+  cf = config
+  cfl = config --list
+  ######################
+  ch = checkout
+  chb = checkout -b
+  ######################
+  d = diff -u
+  ######################
+  f = fetch
+  fp = fetch -p
+  ######################
+  p = push
+  po = push origin
+  ######################
+  r = reset
+  rhead = reset HEAD
+  rh = reset --hard
+  rhhead = reset --hard HEAD
+  ######################
+  rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbs = rebase --skip
+  ######################
+  s = status
+  ######################
+  st = stash
+  sta = stash -u
+  stl = stash list
+  stpop = stash pop
+  stshow = stash show
+  stdrop = stash drop
+  ######################
+  t = tag
+  td = tag -d
+
