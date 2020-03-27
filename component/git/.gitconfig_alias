@@ -40,10 +40,18 @@
   rbc = rebase --continue
   rbs = rebase --skip
   ######################
+  rema = remote add
+  remao = remote add origin
+  remd = remote remove
+  remdo = remote remove origin
+  ######################
+  ref = reflog
+  ######################
   s = status
   ######################
   st = stash
   sta = stash -u
+  stp = stash push
   stl = stash list
   stpop = stash pop
   stshow = stash show
