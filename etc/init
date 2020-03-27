@@ -51,6 +51,53 @@ is_linux() {
     fi
 }
 
+# Install Ricty font
+install_ricty_for_linux() {
+    mkdir ricty_temp; cd ricty_temp
+
+    sudo apt-get -y install fontforge
+    sudo apt-get -y install fonts-migmix
+    wget https://github.com/google/fonts/blob/master/ofl/inconsolata/Inconsolata-Bold.ttf
+    wget https://github.com/google/fonts/blob/master/ofl/inconsolata/Inconsolata-Regular.ttf
+
+    wget https://www.rs.tus.ac.jp/yyusa/ricty/ricty_generator.sh
+    sh ricty_generator.sh auto
+
+    mkdir Ricty
+    mkdir RictyDiscord
+    mv RictyDiscord*.ttf RictyDiscord
+    mv Ricty*.ttf Ricty
+    sudo mv Ricty RictyDiscord /usr/share/fonts/truetype
+    sudo fc-cache -vf
+
+    cd ..
+    rm -rf ricty_temp
+}
+
+# Install GUI with homebrew-cask
+install_casks() {
+    casks=(
+        google-chrome
+        google-japanese-ime
+        slack
+        alfred
+        hyper
+        java
+        android-studio
+        postman
+        boostnote
+        commander-one
+        coteditor
+        station
+        clipy
+    )
+
+    echo "start brew cask install apps..."
+    for cask in "${casks[@]}"; do
+        brew cask install $cask
+    done
+}
+
 echo '
 ██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
 ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
@@ -99,6 +146,8 @@ if is_linux; then
        sudo apt install -y -q $APP_TO_ACQUIRE
 
        git clone https://github.com/riywo/anyenv ~/.anyenv
+
+       install_ricty_for_linux
      fi
 
 elif is_osx; then
@@ -110,14 +159,18 @@ elif is_osx; then
         echo ""
     fi
 
-    brew install $APP_TO_ACQUIRE
+    brew update
+    brew upgrade --all
 
+    brew install $APP_TO_ACQUIRE
     brew install anyenv
 
     brew tap sanemat/font
     brew install ricty
     cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
     fc-cache -vf
+
+    install_casks
 fi
 
 git clone https://github.com/Shougo/neobundle.vim ~/dotfiles/component/vim/.vim/bundle/neobundle.vim
