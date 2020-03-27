@@ -52,3 +52,5 @@
   t = tag
   td = tag -d
 
+[core]
+  excludesfile = ~/.gitignore_global
