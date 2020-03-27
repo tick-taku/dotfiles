@@ -1,5 +1,5 @@
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitconfig.ignore
 [include]
-  path = .gitconfig_alias
-  path = .gitconfig_user
+  path = .gitconfig.alias
+  path = .gitconfig.user
