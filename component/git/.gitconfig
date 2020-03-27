@@ -2,3 +2,4 @@
   excludesfile = ~/.gitignore_global
 [include]
   path = .gitconfig_alias
+  path = .gitconfig_user
