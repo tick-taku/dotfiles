@@ -31,14 +31,18 @@
   po = push origin
   ######################
   r = reset
-  rhead = reset HEAD
-  rh = reset --hard
-  rhhead = reset --hard HEAD
+  rh = reset HEAD
+  rh1 = reset HEAD^
+  rh2 = reset HEAD^^
+  rh3 = reset HEAD^^^
+  rhard = reset --hard
+  rhhard = reset --hard HEAD
   ######################
   rb = rebase
   rba = rebase --abort
   rbc = rebase --continue
   rbs = rebase --skip
+  rbi = rebase -i
   ######################
   rema = remote add
   remao = remote add origin
