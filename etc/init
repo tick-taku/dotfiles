@@ -91,6 +91,7 @@ install_casks() {
         station
         clipy
         docker
+        bitwarden
     )
 
     echo "start brew cask install apps..."
