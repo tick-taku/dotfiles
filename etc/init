@@ -94,6 +94,7 @@ install_casks() {
         bitwarden
         thunderbird
         hyperswitch
+        karabiner-elements
     )
 
     echo "start brew cask install apps..."
