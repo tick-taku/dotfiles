@@ -97,6 +97,11 @@ alias dock='docker-compose'
 alias ain='adb install'
 alias ash='adb shell'
 alias akill='adb kill-server'
+alias atcp='adb tcpip'
+alias ac='adb connect'
+
+# Mirroring connected device
+alias am='scrcpy'
 
 
 #

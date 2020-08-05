@@ -97,6 +97,7 @@ install_casks() {
         karabiner-elements
         spectacle
         micro
+        scrcpy
     )
 
     echo "start brew cask install apps..."
