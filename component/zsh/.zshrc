@@ -106,6 +106,12 @@ autoload -U compinit        # 補完機能を有効にする
 compinit -u
 
 
+## Editor
+#
+export EDITOR='micro'
+export VISUAL='micro'
+
+
 ## zsh editorを有効にする
 #
 autoload zed

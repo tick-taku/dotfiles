@@ -3,10 +3,10 @@
 #
 alias reload='source ~/.zshrc'
 
-alias zshrc='e ~/.zshrc'
-alias zshrc-dev='e ~/.zshrc.mine.development'
-alias zshrc-alias='e ~/.zshrc.mine.aliases'
-alias zshrc-funcs='e .zshrc.mine.funcs'
+alias zshrc='m ~/.zshrc'
+alias zshrc-dev='m ~/.zshrc.mine.development'
+alias zshrc-alias='m ~/.zshrc.mine.aliases'
+alias zshrc-funcs='m .zshrc.mine.funcs'
 
 alias ..='cd ../'
 alias ...='cd ../../'
@@ -58,6 +58,12 @@ alias vim='nvim'
 # for Emacs
 #
 alias e="emacs -nw"
+
+
+#
+# for Micro
+#
+alias m="micro"
 
 
 #

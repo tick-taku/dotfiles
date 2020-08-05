@@ -96,6 +96,7 @@ install_casks() {
         hyperswitch
         karabiner-elements
         spectacle
+        micro
     )
 
     echo "start brew cask install apps..."
