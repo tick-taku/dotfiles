@@ -90,6 +90,7 @@ install_casks() {
         coteditor
         station
         clipy
+        docker
     )
 
     echo "start brew cask install apps..."
