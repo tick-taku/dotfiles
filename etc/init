@@ -95,6 +95,7 @@ install_casks() {
         thunderbird
         hyperswitch
         karabiner-elements
+        spectacle
     )
 
     echo "start brew cask install apps..."
