@@ -93,6 +93,7 @@ install_casks() {
         docker
         bitwarden
         thunderbird
+        hyperswitch
     )
 
     echo "start brew cask install apps..."
