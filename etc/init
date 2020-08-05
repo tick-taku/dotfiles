@@ -92,6 +92,7 @@ install_casks() {
         clipy
         docker
         bitwarden
+        thunderbird
     )
 
     echo "start brew cask install apps..."
