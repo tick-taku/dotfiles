@@ -197,32 +197,177 @@ function agvim() {
 # for Git
 ##############################################################################
 
-# gitの全ブランチ一覧を表示して選択したブランチにチェックアウト
-function ch() {
-    local selectted_branch="$(git branch -a --sort=-authordate | perl -pe 's#^remotes/origin/###' | peco)"
-    git checkout ${selectted_branch##* }
-}
-
-# gitのローカルブランチ一覧を表示して選択したブランチにチェックアウト
-function ch-local() {
-    local selectted_branch="$(git branch | peco)"
-    git checkout ${selectted_branch##* }
-}
-
-# gitのリモートブランチ一覧を表示して選択したブランチにチェックアウト
-function ch-remote() {
-    local selectted_branch="$(git branch -r --sort=-authordate | perl -pe 's#origin/###' | peco)"
-    git checkout ${selectted_branch##* }
-}
-
-# リモートブランチをマージ
-function pull() {
-    local selectted_branch="$(git branch | peco)"
-    git fetch && git checkout ${selectted_branch##* } && git rebase origin/${selectted_branch##* }
-}
-
 # develop をマージ
 function pull-dev() {
     git fetch && git rebase origin/develop
 }
 
+# gitの全ブランチ一覧を表示して選択したブランチにチェックアウト
+function _git_checkout() {
+    local selectted_branch="$(git branch -a --sort=-authordate | perl -pe 's#^remotes/origin/###' | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+# gitのローカルブランチ一覧を表示して選択したブランチにチェックアウト
+function _git_checkout_local() {
+    local selectted_branch="$(git branch | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+# gitのリモートブランチ一覧を表示して選択したブランチにチェックアウト
+function _git_checkout_remote() {
+    local selectted_branch="$(git branch -r --sort=-authordate | perl -pe 's#origin/###' | peco)"
+    git checkout ${selectted_branch##* }
+}
+
+# git diff を補完
+#  -s : peco ファイルを選択して diff をとる
+#  -a : 全 diff を表示
+function _git_diff() {
+  case $1 in
+	-s)
+	  local selected_file="$(g lm | peco)"
+	  if [ ! -z ${selected_file} ]; then
+	  	git diff ${selected_file}
+	  	echo -n "\nAdd ${selected_file} to staging? "; read answer
+	  	  case $answer in
+	    	[yY] | [yY]es | YES )
+	          _git_add ${selected_file};;
+	      	* )
+	      	  echo "No actions."
+	      	  return 1;;
+	 	  esac
+	  else
+	  	echo "No selected for diff."
+	  fi
+	  ;;
+	-a)
+	  git diff .
+	  ;;
+	'')
+	  echo "No actions."
+	  ;;
+	*)
+	  git diff $1
+
+	  echo -n "\nAdd {$1} to staging? "; read answer
+	  case $answer in
+	    [yY] | [yY]es | YES )
+	      _git_add $1;;
+	    * )
+	      echo "No actions."
+	      return 1;;
+	  esac
+	  ;;
+  esac	
+}
+
+# git add を補完
+function _git_add() {
+  case $1 in
+	-s)
+	  local selected_file="$(g lm | peco)"
+	  if [ ! -z ${selected_file} ]; then
+	  	git add $2 ${selected_file}
+	  else
+	    echo "No selected for add."
+	  fi
+	  ;;
+	-a)
+	  git add .
+	  ;;
+	-u)
+	  local selected_file="$(g lu | peco)"
+	  if [ ! -z ${selected_file} ]; then
+	    git add $2 ${selected_file}
+	  else
+	    echo "No selected for add."
+	  fi
+	  ;;
+	'')
+	  echo "No selected."
+	  ;;
+	*)
+	  git add $1
+	  ;;
+  esac
+}
+
+# git restore を補完
+function _git_restore() {
+  case $1 in
+	-s)
+	  local selected_file="$(g dn --staged | peco)"
+	  if [ ! -z ${selected_file} ]; then
+	    git restore --staged ${selected_file}
+	  else
+	    echo "No selected for restore."
+	  fi
+	  ;;
+	-a)
+	  git reset HEAD
+	  ;;
+	'')
+	  echo "No actions."
+	  ;;
+	*)
+	  git restore --staged $1
+	  ;;
+  esac
+}
+
+# git checkout <file> を補完
+function _git_discard_diff() {
+  case $1 in
+	-s)
+	  local selected_file="$(g lm | peco)"
+	  if [ ! -z ${selected_file} ]; then
+	    echo -n "Really discard ${selected_file} changes? "; read answer
+	  	  case $answer in
+	    	[yY] | [yY]es | YES )
+	          git checkout ${selected_file##* };;
+	      	* )
+	      	  echo "No actions."
+	      	  return 1;;
+	 	  esac
+	  else
+	    echo "No selected for discard."
+	  fi
+	  ;;
+	-a)
+	  echo -n "Really discard all changes? "; read answer
+	  case $answer in
+	    [yY] | [yY]es | YES )
+	      git reset --hard HEAD;;
+	    * )
+	      echo "No actions."
+	      return 1;;
+	  esac
+	  ;;
+	'')
+	  echo "No selected file to discard changes."
+	  ;;
+	*)
+	  git checkout $1
+	  ;;
+  esac
+}
+
+# 今のブランチを origin に push
+function _git_push_current_branch() {
+  local checkouted="$(g b --show-current)"
+  echo -n "Really push to origin/${checkouted}? "; read answer
+  case $answer in
+  	[yY] | [yY]es | YES )
+  	  git push origin $(g b --show-current);;
+  	* )
+  	  echo "No actions."
+  	  return 1;;
+  esac
+}
+
+# peco で選択したブランチに origin から pull してくる
+function _git_pull() {
+    local selectted_branch="$(git branch | peco)"
+    git fetch && git checkout ${selectted_branch##* } && git rebase origin/${selectted_branch##* }
+}

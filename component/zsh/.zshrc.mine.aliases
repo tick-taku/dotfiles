@@ -74,8 +74,8 @@ compdef g=git
 
 alias b="git branch -vv"
 alias s="git status"
-alias a="git add"
-alias d="git diff --color"
+#alias a="git add"
+#alias d="git diff --color"
 #alias c="git commit"
 
 alias t='tig'
@@ -84,6 +84,18 @@ alias ta='tig --all'
 alias g-conf='e ~/.gitconfig'
 alias g-purge='git checkout . && git clean -df'
 
+# 自作関数呼び出し
+
+alias a='_git_add'
+alias d='_git_diff'
+alias r='_git_restore'
+alias dd='_git_discard_diff'
+
+alias po='_git_push_current_branch'
+alias pl='_git_pull'
+alias ch='_git_checkout'
+alias chl='_git_checkout_local'
+alias chr='_git_checkout_remote'
 
 #
 # for Docker

@@ -23,9 +23,14 @@
   chb = checkout -b
   ######################
   d = diff -u
+  dn = diff --name-only --diff-filter=M
   ######################
   f = fetch
   fp = fetch -p
+  ######################
+  ls = ls-files
+  lm = ls-files -m
+  lu = ls-files -o
   ######################
   p = push
   po = push origin
