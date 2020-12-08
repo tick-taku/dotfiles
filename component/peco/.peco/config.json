@@ -1,0 +1,16 @@
+{
+    "Keymap": {
+        "C-u": "peco.ToggleSelectionAndSelectNext",
+        "C-b": "peco.ScrollPageUp",
+        "C-f": "peco.ScrollPageDown",
+        "C-j": "peco.SelectDown",
+        "C-k": "peco.SelectUp"
+    },
+    "Style": {
+  		"Basic": ["on_default", "blue"],
+    	"Selected": ["underline", "on_green", "black"],
+    	"Query": ["green", "bold"],
+    	"Matched": ["166", "on_black"]
+  	},
+  	"Use256Color": true
+}
