@@ -213,8 +213,7 @@ function _git_branch() {
 
 	while getopts ":lr" opt; do
 		case $opt in
-		  l)
-		  	selected_branch="$(git branch | peco)"; break ;;
+		  l) selected_branch="$(git branch | peco)"; break ;;
 		  r) selected_branch="$(git branch -r --sort=-authordate | perl -pe 's#origin/###' | peco)"; break ;;
 			?)
 				echo "Unknown option selected.";
@@ -234,12 +233,19 @@ function _git_branch() {
 # gitの全ブランチ一覧を表示して選択したブランチにチェックアウト
 function _git_checkout() {
 	local selected_branch=""
+	local options=()
 
-	while getopts ":lrf:" opt; do
+	while getopts ":lrhsb:f:" opt; do
 		case $opt in
-		  f) selected_branch=$OPTARG; break ;;
+		  s) selected_branch=$OPTARG; break ;;
+		  h) selected_branch="$(git log --oneline | peco | cut -d ' ' -f 1)"; break ;;
 		  l) selected_branch="$(git branch | peco)"; break ;;
 		  r) selected_branch="$(git branch -r --sort=-authordate | perl -pe 's#origin/###' | peco)"; break ;;
+		  b)
+		  	selected_branch=$OPTARG
+		  	options+=("-b")
+		  	break
+		  	;;
 			?)
 				echo "Unknown option selected."
 				return 1
@@ -252,7 +258,7 @@ function _git_checkout() {
 		return 1
 	fi
 
-	git checkout ${selected_branch##* }
+	git checkout $options[@] ${selected_branch##* }
 }
 
 # git diff を補完
