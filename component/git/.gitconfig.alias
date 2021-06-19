@@ -57,6 +57,7 @@
   ref = reflog
   ######################
   s = status
+  ss = status -s
   ######################
   st = stash
   sta = stash -u
