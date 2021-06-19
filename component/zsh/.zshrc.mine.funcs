@@ -199,7 +199,9 @@ function agvim() {
 
 # develop をマージ
 function update_develop() {
+	local was_there="$(git branch --show-current)"
 	git fetch && git checkout develop && git rebase origin/develop
+	git checkout $was_there
 }
 
 # git のブランチ名をクリップボードにコピー
@@ -235,7 +237,7 @@ function _git_checkout() {
 	local selected_branch=""
 	local options=()
 
-	while getopts ":lrhsb:f:" opt; do
+	while getopts ":lrhb:s:" opt; do
 		case $opt in
 		  s) selected_branch=$OPTARG; break ;;
 		  h) selected_branch="$(git log --oneline | peco | cut -d ' ' -f 1)"; break ;;
@@ -391,7 +393,54 @@ function _git_pull() {
     git fetch && git checkout ${selectted_branch##* } && git rebase origin/${selectted_branch##* }
 }
 
+# コミットハッシュのヒストリーから cherry-pick する
+function _git_cherry_pick() {
+	while getopts ":s:r:" opt; do
+		case $opt in
+			r)
+		  	local start="$(git log --oneline $OPTARG | peco | cut -d ' ' -f 1)"
+		    local end="$(git log --oneline $OPTARG | peco | cut -d ' ' -f 1)"
+				git cherry-pick $start..$end
+				;;				
+		  s)
+		  	local commit="$(git log --oneline $OPTARG | peco | cut -d ' ' -f 1)"
+				git cherry-pick $commit
+				;;
+			?)
+				echo "Unknown option selected."
+				return 1
+				;;
+		esac
+	done
+}
+
+# コミットハッシュのヒストリーから rebase -i する
+function _git_rebase_interactive() {
+	local start="$(_git_commit_hash)"
+	git rebase -i $start
+}
+
+# コミットハッシュのヒストリーから bisect する
+function _git_bisect() {
+	while getopts ":sbgr" opt; do
+		case $opt in
+			b) git bisect bad ;;
+			g) git bisect good ;;
+			r) git bisect reset ;;
+		  s)
+				local bad="$(_git_commit_hash)"
+				local good="$(_git_commit_hash)"
+				git bisect start $bad $good
+				;;
+			?)
+				echo "Unknown option selected."
+				return 1
+				;;
+		esac
+	done
+}
+
 # コミットのハッシュ値取得
 function _git_commit_hash() {
-	git log --oneline | peco | cut -d ' ' -f 1 C
+	git log --oneline | peco | cut -d ' ' -f 1
 }
