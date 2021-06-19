@@ -12,6 +12,9 @@ bind generic <Ctrl-b> scroll-page-up
 # ^rで再読み込み
 bind generic <Ctrl-r> refresh
 
+# yでコミットハッシュをクリップボードにコピー
+bind generic y @sh -c "echo %(commit) | pbcopy"
+
 # diff view時の差分移動
 # USキーボード用 (次差分: 2 前差分: @)
 bind diff @ :?^@@
