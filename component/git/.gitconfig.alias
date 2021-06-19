@@ -32,6 +32,11 @@
   lm = ls-files -m
   lu = ls-files -o
   ######################
+  m = merge
+  md = merge develop
+  ma = merge --abort
+  mc = merge --continue
+  ######################
   p = push
   po = push origin
   ######################
