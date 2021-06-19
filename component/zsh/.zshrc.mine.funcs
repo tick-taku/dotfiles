@@ -96,7 +96,7 @@ function peco-select-history() {
     zle redisplay
 }
 zle -N peco-select-history
-bindkey '^r' peco-select-history
+bindkey '^h' peco-select-history
 
 
 #
@@ -114,7 +114,7 @@ function peco-findcd() {
     zle clear-screen
  }
 zle -N peco-findcd
-bindkey '^p^k' peco-findcd
+bindkey '^c^d' peco-findcd
 
 
 #
