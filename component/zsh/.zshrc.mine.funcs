@@ -198,8 +198,8 @@ function agvim() {
 ##############################################################################
 
 # develop をマージ
-function pull-dev() {
-    git fetch && git rebase origin/develop
+function update_develop() {
+	git fetch && git checkout develop && git rebase origin/develop
 }
 
 # gitの全ブランチ一覧を表示して選択したブランチにチェックアウト
