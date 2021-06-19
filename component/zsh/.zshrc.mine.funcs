@@ -384,3 +384,8 @@ function _git_pull() {
     local selectted_branch="$(git branch | peco)"
     git fetch && git checkout ${selectted_branch##* } && git rebase origin/${selectted_branch##* }
 }
+
+# コミットのハッシュ値取得
+function _git_commit_hash() {
+	git log --oneline | peco | cut -d ' ' -f 1 C
+}
