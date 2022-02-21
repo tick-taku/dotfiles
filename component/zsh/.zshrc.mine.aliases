@@ -87,7 +87,7 @@ alias dd='_git_discard_diff'
 alias po='_git_push_current_branch'
 alias pl='_git_pull'
 alias ch='_git_checkout'
-alias cp='_git_cherry_pick'
+alias chp='_git_cherry_pick'
 alias bs='_git_bisect'
 alias rbi='_git_rebase_interactive'
 
