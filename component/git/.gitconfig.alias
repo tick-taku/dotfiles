@@ -1,3 +1,4 @@
+
 [alias]
   a = add
   aa = add .
@@ -7,7 +8,7 @@
   bd = branch -D
   ######################
   c = commit -m
-  ca = commit --amend
+  ca = commit --amend --no-edit
   ######################
   cl = clone
   ######################
