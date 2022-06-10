@@ -75,6 +75,16 @@ function peco-pkill() {
 }
 alias pk="peco-pkill"
 
+#
+# ghq の ls
+#
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    cd ${selected_dir}
+  fi
+}
+alias gls='peco-src'
 
 ##############################################################################
 # キーバインド付きの関数

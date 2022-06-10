@@ -98,6 +98,7 @@ install_casks() {
         spectacle
         micro
         scrcpy
+        ghq
     )
 
     echo "start brew cask install apps..."
