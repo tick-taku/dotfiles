@@ -76,6 +76,8 @@ alias s="git status"
 alias g-conf='e ~/.gitconfig'
 alias g-purge='git checkout . && git clean -df'
 
+alias gho='gh pr list -w'
+
 # 自作関数呼び出し
 
 alias b='_git_branch'
@@ -93,7 +95,7 @@ alias rbi='_git_rebase_interactive'
 
 alias ud='update_develop'
 
-alias gh='_git_commit_hash C'
+alias gch='_git_commit_hash C'
 
 # for tig
 

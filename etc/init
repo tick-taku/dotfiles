@@ -99,6 +99,7 @@ install_casks() {
         micro
         scrcpy
         ghq
+        gh
     )
 
     echo "start brew cask install apps..."

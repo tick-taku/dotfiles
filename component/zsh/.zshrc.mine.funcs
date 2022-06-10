@@ -454,3 +454,16 @@ function _git_bisect() {
 function _git_commit_hash() {
 	git log --oneline | peco | cut -d ' ' -f 1
 }
+
+# PR を merge する
+function _gh_pr_merge() {
+	local selected_pr_number=$(gh pr list | peco --query "$LBUFFER" | awk '{ print $1 }')
+	echo -n "It's collect? [${selected_pr_number}]"; read answer
+	case $answer in
+		[yY] | [yY]es | YES )
+			gh pr merge ${selected_pr_number};;
+		* )
+			return 1;;
+	esac
+}
+alias ghpm='_gh_pr_merge'
