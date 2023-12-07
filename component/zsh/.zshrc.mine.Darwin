@@ -21,3 +21,9 @@ fnd() {
 
 # HomeBrew-Caskで /Applications/ 以下にインストールする
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# for homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+
+# for Java
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
