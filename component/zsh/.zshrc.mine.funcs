@@ -46,8 +46,6 @@ peco_find_open_command() {
     fi
 }
 
-
-
 ##############################################################################
 # キーバインド無しの関数
 ##############################################################################
@@ -202,6 +200,19 @@ function agvim() {
   vim $(ag "$@" | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
 }
 
+#
+# 'git status'した結果を選択してカーソル位置に挿入(複数選択可)
+#
+function peco_insert_selected_git_files() {
+    local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+      BUFFER="cd ${selected_dir}"
+      zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco_insert_selected_git_files
+bindkey "^s^l" peco_insert_selected_git_files
 
 ##############################################################################
 # for Git
@@ -467,3 +478,50 @@ function _gh_pr_merge() {
 	esac
 }
 alias ghpm='_gh_pr_merge'
+
+# PR の CI ステータスチェック
+function _gh_pr_check_ci() {
+	local selected_pr_number=$(gh pr list | peco --query "$LBUFFER" | awk '{ print $1 }')
+	gh pr checks ${selected_pr_number}
+}
+alias ghpc='_gh_pr_check_ci'
+
+# PR をウェブで開く
+function _gh_pr_view_web() {
+	local selected_pr_number=$(gh pr list | peco --query "$LBUFFER" | awk '{ print $1 }')
+	gh pr view -w ${selected_pr_number}
+}
+alias ghpv='_gh_pr_view_web'
+
+# Issue をウェブで開く
+function _gh_issue_view_web() {
+	local selected_is_number=$(gh issue list | peco --query "$LBUFFER" | awk '{ print $1 }')
+	gh issue view -w ${selected_is_number}
+}
+alias ghiv='_gh_issue_view_web'
+
+# 対象のディレクトリ内の png を webp に変換
+function _convert_png_to_webp() {
+	local directory=$(ls -d */ | peco --query "$LBUFFER")
+	cp -rf $directory ${directory}_backup
+	mkdir {${directory}/drawable-mdpi,${directory}/drawable-xhdpi,${directory}/drawable-xxhdpi,${directory}/drawable-xxxhdpi}
+
+	for value in `fd . $directory -d 1 -t f -e png -E '*@*' -x basename {} .png`; do
+	    read "output?file name for [$value]: "
+        mv ${directory}/${value}.png ${directory}/drawable-mdpi/${output}.png
+        mv ${directory}/${value}@2x.png ${directory}/drawable-xhdpi/${output}.png
+        mv ${directory}/${value}@3x.png ${directory}/drawable-xxhdpi/${output}.png
+        mv ${directory}/${value}@4x.png ${directory}/drawable-xxxhdpi/${output}.png
+	done
+
+	fd . ${directory}/ -d 2 -t f -e png -x cwebp {.}.png -o {.}.webp
+	fd . ${directory}/ -d 2 -t f -e png -x rm -rf {}
+}
+alias cpw='_convert_png_to_webp'
+
+function _convert_png_to_webp_all() {
+    fd . ./ -d 1 -t f -e png -x cwebp {.}.png -o {.}.webp
+    mkdir webp
+    fd . ./ -d 1 -t f -e webp -x mv {} webp/
+}
+alias cpwa='_convert_png_to_webp_all'

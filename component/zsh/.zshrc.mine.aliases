@@ -77,6 +77,8 @@ alias g-conf='e ~/.gitconfig'
 alias g-purge='git checkout . && git clean -df'
 
 alias gho='gh pr list -w'
+alias ghpo='gh pr view'
+alias ghpc='gh pr create'
 
 # 自作関数呼び出し
 
