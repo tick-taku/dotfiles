@@ -80,26 +80,23 @@ install_casks() {
         google-chrome
         google-japanese-ime
         slack
-        alfred
-        hyper
-        java
         android-studio
         postman
-        boostnote
-        commander-one
         coteditor
-        station
-        clipy
         docker
-        bitwarden
-        thunderbird
         hyperswitch
         karabiner-elements
-        spectacle
         micro
         scrcpy
         ghq
         gh
+        raycast
+        arc
+        1password
+        obsidian
+        raindropio
+        warp
+        notion
     )
 
     echo "start brew install apps..."
